@@ -63,11 +63,15 @@ public class JobSchedulerBackwardsCompatibilityIT extends SampleExtensionIntegTe
                     * As cluster is fully upgraded either by full restart or rolling upgrade, we assert, that all nodes are upgraded to use latest plugins.
                     * we trigger a call for scheduling watcher job now.
                      */
+                    System.out.println("*******************Checkpoint0***************************");
                     Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler"));
+                    System.out.println("*******************Checkpoint1***************************");
                     Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler-sample-extension"));
+                    System.out.println("*******************Checkpoint2***************************");
                     if (CLUSTER_TYPE == ClusterType.UPGRADED || "third".equals(System.getProperty("tests.rest.bwcsuite_round"))) {
                         createBasicWatcherJob();
                     }
+                    System.out.println("*******************Checkpoint3***************************");
             }
         }
     }
@@ -143,5 +147,6 @@ public class JobSchedulerBackwardsCompatibilityIT extends SampleExtensionIntegTe
 
         long actualCount = waitAndCountRecords(index, 80000);
         Assert.assertEquals(1, actualCount);
+        System.out.println("*******************Checkpoint4***************************");
     }
 }
