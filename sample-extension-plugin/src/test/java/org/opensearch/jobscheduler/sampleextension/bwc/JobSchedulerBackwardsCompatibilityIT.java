@@ -39,7 +39,7 @@ public class JobSchedulerBackwardsCompatibilityIT extends SampleExtensionIntegTe
                     /*
                     * as only the old version of job-scheduler plugin is loaded, we only assert that it is loaded.
                      */
-                    Assert.assertTrue(pluginNames.contains("opendistro-job-scheduler"));
+                    Assert.assertTrue(pluginNames.contains("opendistro-job-scheduler") || pluginNames.contains("opensearch-job-scheduler"));
                     break;
                 case MIXED:
                     /*
