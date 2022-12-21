@@ -218,12 +218,14 @@ task prepareBwcTests {
     task "${baseName}#oldVersionClusterTask$i"(type: StandaloneRestIntegTestTask) {
         if (!bwcBundleTest) {
             dependsOn 'prepareBwcTests'
+            systemProperty 'tests.bwc_type', 'plugin'
+        } else {
+            systemProperty 'tests.bwc_type', 'bundle'
         }
         useCluster testClusters."${baseName}$i"
         filter {
             includeTestsMatching "org.opensearch.jobscheduler.sampleextension.bwc.*IT"
         }
-        systemProperty 'tests.bwc_type', 'plugin'
         systemProperty 'tests.rest.bwcsuite', 'old_cluster'
         systemProperty 'tests.rest.bwcsuite_round', 'old'
         systemProperty 'tests.plugin_bwc_version', bwcVersion
