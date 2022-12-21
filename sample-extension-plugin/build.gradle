@@ -216,11 +216,11 @@ task prepareBwcTests {
 // Create two test clusters with 3 nodes of the old version
 2.times {i ->
     task "${baseName}#oldVersionClusterTask$i"(type: StandaloneRestIntegTestTask) {
-        if (!bwcBundleTest) {
+        if (bwcBundleTest) {
+            systemProperty 'tests.bwc_type', 'bundle'
+        } else {
             dependsOn 'prepareBwcTests'
             systemProperty 'tests.bwc_type', 'plugin'
-        } else {
-            systemProperty 'tests.bwc_type', 'bundle'
         }
         useCluster testClusters."${baseName}$i"
         filter {
@@ -244,10 +244,12 @@ task "${baseName}#mixedClusterTask"(type: StandaloneRestIntegTestTask) {
         doFirst {
             testClusters."${baseName}0".nextNodeToNextVersion()
         }
+        systemProperty 'tests.bwc_type', 'bundle'
     } else {
         doFirst {
             testClusters."${baseName}0".upgradeNodeAndPluginToNextVersion(plugins)
         }
+        systemProperty 'tests.bwc_type', 'plugin'
     }
 
     filter {
@@ -270,10 +272,12 @@ task "${baseName}#twoThirdsUpgradedClusterTask"(type: StandaloneRestIntegTestTas
         doFirst {
             testClusters."${baseName}0".nextNodeToNextVersion()
         }
+        systemProperty 'tests.bwc_type', 'bundle'
     } else {
         doFirst {
             testClusters."${baseName}0".upgradeNodeAndPluginToNextVersion(plugins)
         }
+        systemProperty 'tests.bwc_type', 'plugin'
     }
     filter {
         includeTestsMatching "org.opensearch.jobscheduler.sampleextension.bwc.*IT"

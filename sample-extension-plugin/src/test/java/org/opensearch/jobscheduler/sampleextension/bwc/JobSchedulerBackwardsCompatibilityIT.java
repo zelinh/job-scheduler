@@ -26,7 +26,7 @@ public class JobSchedulerBackwardsCompatibilityIT extends SampleExtensionIntegTe
     public void testBackwardsCompatibility() throws Exception {
         String uri = getPluginUri();
         assert uri != null;
-        Boolean bwcTestBundleType = System.getProperty("tests.bwc_type").equals("bundle");
+        boolean bwcTestBundleType = System.getProperty("tests.bwc_type") != null && System.getProperty("tests.bwc_type").equals("bundle");
 
         Map<String, Object> response = getAsMap(uri);
         Map<String, Map<String, Object>> responseMap = (Map<String, Map<String, Object>>) response.get("nodes");
