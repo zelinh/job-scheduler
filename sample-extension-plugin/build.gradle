@@ -277,7 +277,6 @@ task "${baseName}#twoThirdsUpgradedClusterTask"(type: StandaloneRestIntegTestTas
         doFirst {
             testClusters."${baseName}0".upgradeNodeAndPluginToNextVersion(plugins)
         }
-        systemProperty 'tests.bwc_type', 'plugin'
     }
     filter {
         includeTestsMatching "org.opensearch.jobscheduler.sampleextension.bwc.*IT"
@@ -299,6 +298,7 @@ task "${baseName}#rollingUpgradeClusterTask"(type: StandaloneRestIntegTestTask) 
         doFirst {
             testClusters."${baseName}0".nextNodeToNextVersion()
         }
+        systemProperty 'tests.bwc_type', 'bundle'
     } else {
         doFirst {
             testClusters."${baseName}0".upgradeNodeAndPluginToNextVersion(plugins)
@@ -324,6 +324,7 @@ task "${baseName}#fullRestartClusterTask"(type: StandaloneRestIntegTestTask) {
         doFirst {
             testClusters."${baseName}1".goToNextVersion()
         }
+        systemProperty 'tests.bwc_type', 'bundle'
     } else {
         doFirst {
             testClusters."${baseName}1".upgradeAllNodesAndPluginsToNextVersion(plugins)
