@@ -216,10 +216,10 @@ task prepareBwcTests {
 // Create two test clusters with 3 nodes of the old version
 2.times {i ->
     task "${baseName}#oldVersionClusterTask$i"(type: StandaloneRestIntegTestTask) {
+        dependsOn 'prepareBwcTests'
         if (bwcBundleTest) {
             systemProperty 'tests.bwc_type', 'bundle'
         } else {
-            dependsOn 'prepareBwcTests'
             systemProperty 'tests.bwc_type', 'plugin'
         }
         useCluster testClusters."${baseName}$i"
