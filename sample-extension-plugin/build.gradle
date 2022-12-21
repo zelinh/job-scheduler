@@ -170,26 +170,6 @@ String bwcJobSchedulerPlugin = "job-scheduler-artifacts.zip"
                     node.setting("plugins.security.restapi.roles_enabled", "[\"all_access\", \"security_rest_api_access\"]")
                     node.setting("plugins.security.system_indices.enabled", "true")
                 }
-                plugin(provider(new Callable<RegularFile>(){
-                    @Override
-                    RegularFile call() throws Exception {
-                        return new RegularFile() {
-                            @Override
-                            File getAsFile() {
-                                File dir = new File(rootDir.path + "/sample-extension-plugin/" + bwcFilePath + bwcJobSchedulerVersion)
-
-                                if (!dir.exists()) {
-                                    dir.mkdirs()
-                                }
-                                File f = new File(dir, bwcJobSchedulerPlugin)
-                                if (!f.exists()) {
-                                    new URL(bwc_js_download_url).withInputStream{ ins -> f.withOutputStream{ it << ins }}
-                                }
-                                return fileTree(bwcFilePath + bwcJobSchedulerVersion).getSingleFile()
-                            }
-                        }
-                    }
-                }))
             } else {
                 versions = ["7.10.2",opensearch_version]
                 plugin(provider(new Callable<RegularFile>(){
