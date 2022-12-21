@@ -176,7 +176,7 @@ String bwcJobSchedulerPlugin = "job-scheduler-artifacts.zip"
                         return new RegularFile() {
                             @Override
                             File getAsFile() {
-                                File dir = new File(rootDir.path + "/sample-extension-plugin/" + bwcFilePath + bwcVersion)
+                                File dir = new File(rootDir.path + "/sample-extension-plugin/" + bwcFilePath + bwcJobSchedulerVersion)
 
                                 if (!dir.exists()) {
                                     dir.mkdirs()
@@ -185,7 +185,7 @@ String bwcJobSchedulerPlugin = "job-scheduler-artifacts.zip"
                                 if (!f.exists()) {
                                     new URL(bwc_js_download_url).withInputStream{ ins -> f.withOutputStream{ it << ins }}
                                 }
-                                return fileTree(bwcFilePath + bwcVersion).getSingleFile()
+                                return fileTree(bwcFilePath + bwcJobSchedulerVersion).getSingleFile()
                             }
                         }
                     }
