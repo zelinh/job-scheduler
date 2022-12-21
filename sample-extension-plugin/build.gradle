@@ -207,7 +207,7 @@ task prepareBwcTests {
     dependsOn rootBundle
     doLast {
         plugins = [
-                rootProject.getObjects().fileProperty().value(rootBundle.getArchiveFile())  //j-s
+                rootProject.getObjects().fileProperty().value(rootBundle.getArchiveFile()),  //j-s
                 project.getObjects().fileProperty().value(bundle.getArchiveFile())     //j-s-extension
         ]
     }

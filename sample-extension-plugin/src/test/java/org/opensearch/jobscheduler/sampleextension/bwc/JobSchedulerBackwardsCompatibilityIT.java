@@ -72,8 +72,8 @@ public class JobSchedulerBackwardsCompatibilityIT extends SampleExtensionIntegTe
                      */
                     System.out.println("*******************pluginsNames***************************" + pluginNames);
                     Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler"));
+                    Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler-sample-extension"));
                     if (!bwcTestBundleType) {
-                        Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler-sample-extension"));
                         Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler-sample-extension-intentional-fail"));
                     }
                     if (CLUSTER_TYPE == ClusterType.UPGRADED || "third".equals(System.getProperty("tests.rest.bwcsuite_round"))) {
