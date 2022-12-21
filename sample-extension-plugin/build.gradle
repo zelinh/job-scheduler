@@ -223,7 +223,7 @@ task prepareBwcTests {
         filter {
             includeTestsMatching "org.opensearch.jobscheduler.sampleextension.bwc.*IT"
         }
-        systemProperty 'tests.bwc_type', 'bundle'
+        systemProperty 'tests.bwc_type', 'plugin'
         systemProperty 'tests.rest.bwcsuite', 'old_cluster'
         systemProperty 'tests.rest.bwcsuite_round', 'old'
         systemProperty 'tests.plugin_bwc_version', bwcVersion
