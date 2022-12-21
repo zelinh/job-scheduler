@@ -145,7 +145,7 @@ String bwcJobSchedulerPlugin = "job-scheduler-artifacts.zip"
             testDistribution = "ARCHIVE"
             numberOfNodes = 3
             if (bwcBundleTest) {
-                versions = ["2.5.0"]
+                versions = ["1.3.2","2.5.0"]
                 nodes.each { node ->
                     node.extraConfigFile("kirk.pem", file("src/test/resources/security/kirk.pem"))
                     node.extraConfigFile("kirk-key.pem", file("src/test/resources/security/kirk-key.pem"))
@@ -322,7 +322,8 @@ task "${baseName}#fullRestartClusterTask"(type: StandaloneRestIntegTestTask) {
     useCluster testClusters."${baseName}1"
     if (bwcBundleTest){
         doFirst {
-            testClusters."${baseName}1".goToNextVersion()
+//            testClusters."${baseName}1".goToNextVersion()
+            testClusters."${baseName}1".upgradeAllNodesAndPluginsToNextVersion(plugins)
         }
         systemProperty 'tests.bwc_type', 'bundle'
     } else {
