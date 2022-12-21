@@ -66,6 +66,7 @@ public class JobSchedulerBackwardsCompatibilityIT extends SampleExtensionIntegTe
                     System.out.println("*******************Checkpoint0***************************");
                     Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler"));
                     System.out.println("*******************Checkpoint1***************************");
+                    System.out.println("*******************pluginNames***************************" + pluginNames);
                     Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler-sample-extension"));
                     System.out.println("*******************Checkpoint2***************************");
                     if (CLUSTER_TYPE == ClusterType.UPGRADED || "third".equals(System.getProperty("tests.rest.bwcsuite_round"))) {

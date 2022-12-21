@@ -341,11 +341,11 @@ task bwcTestSuite(type: StandaloneRestIntegTestTask) {
     dependsOn tasks.named("${baseName}#fullRestartClusterTask")
 }
 
-task bwcTestSuiteBundle() {
-    System.out.println(bwcBundleTest)
-    System.out.println("Bundle is**************** " + bundle.toString())
-    System.out.println("Project getTask**********" + project.getTasks())
-}
+//task bwcTestSuiteBundle() {
+//    System.out.println(bwcBundleTest)
+//    System.out.println("Bundle is**************** " + bundle.toString())
+//    System.out.println("Project getTask**********" + project.getTasks())
+//}
 
 tasks.named("check").configure {dependsOn(bwcTestSuite)}
 
