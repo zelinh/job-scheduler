@@ -40,6 +40,7 @@ public class JobSchedulerBackwardsCompatibilityIT extends SampleExtensionIntegTe
                     /*
                     * as only the old version of job-scheduler plugin is loaded, we only assert that it is loaded.
                      */
+                    System.out.println("*******************pluginsNames***************************" + pluginNames);
                     if (bwcTestBundleType) {
                         Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler"));
                     } else {
