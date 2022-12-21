@@ -26,6 +26,7 @@ public class JobSchedulerBackwardsCompatibilityIT extends SampleExtensionIntegTe
     public void testBackwardsCompatibility() throws Exception {
         String uri = getPluginUri();
         assert uri != null;
+        Boolean bwcTestBundleType = System.getProperty("tests.bwc_type").equals("bundle");
 
         Map<String, Object> response = getAsMap(uri);
         Map<String, Map<String, Object>> responseMap = (Map<String, Map<String, Object>>) response.get("nodes");
@@ -39,7 +40,11 @@ public class JobSchedulerBackwardsCompatibilityIT extends SampleExtensionIntegTe
                     /*
                     * as only the old version of job-scheduler plugin is loaded, we only assert that it is loaded.
                      */
-                    Assert.assertTrue(pluginNames.contains("opendistro-job-scheduler") || pluginNames.contains("opensearch-job-scheduler"));
+                    if (bwcTestBundleType) {
+                        Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler"));
+                    } else {
+                        Assert.assertTrue(pluginNames.contains("opendistro-job-scheduler"));
+                    }
                     break;
                 case MIXED:
                     /*
@@ -66,8 +71,9 @@ public class JobSchedulerBackwardsCompatibilityIT extends SampleExtensionIntegTe
                     System.out.println("*******************Checkpoint0***************************");
                     Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler"));
                     System.out.println("*******************Checkpoint1***************************");
-                    System.out.println("*******************pluginNames***************************" + pluginNames);
-                    Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler-sample-extension"));
+                    if (!bwcTestBundleType) {
+                        Assert.assertTrue(pluginNames.contains("opensearch-job-scheduler-sample-extension"));
+                    }
                     System.out.println("*******************Checkpoint2***************************");
                     if (CLUSTER_TYPE == ClusterType.UPGRADED || "third".equals(System.getProperty("tests.rest.bwcsuite_round"))) {
                         createBasicWatcherJob();
